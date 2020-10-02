@@ -1,0 +1,37 @@
+<div class="alert alert-primary" role="alert">
+  LOGIN FORM
+</div>
+<form class="form" #userlogin="ngForm" (ngSubmit)="userlogin.form.valid && onClickSubmit(userlogin.value)">
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Email :</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="model.email"
+        placeholder="enter your email address" required [pattern]="pattern">
+      <div *ngIf="userlogin.submitted && email.invalid">
+        <div class="text-danger" *ngIf="email.errors.required">Email is required</div>
+        <div class="text-danger" *ngIf="email.errors.pattern">Email must be a valid email address</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Password :</label>
+    <div class="col-sm-10">
+      <input type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel"
+        required minlength=6>
+      <div *ngIf="userlogin.submitted && password.invalid" class="text-danger">
+        <div *ngIf="password.errors.required">Password is required</div>
+        <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" value="submit" class="btn btn-primary">LOGIN</button>
+    </div>
+    <div *ngIf="model.loginErr" class="col-sm-10">
+      <p class="text-danger">An error has occurred, please try again with correct details</p>
+    </div>
+  </div>
+</form>

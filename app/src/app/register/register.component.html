@@ -1,0 +1,122 @@
+<html>
+
+<head>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
+  <div class="alert alert-primary" role="alert">
+    REGISTER FORM
+  </div>
+  <form class="form" #userlogin="ngForm" (ngSubmit)="userlogin.form.valid && onClickSubmit(userlogin.value)">
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">NAME :</label>
+      <div class="col-sm-10">
+        <input type="text" name="name" class="form-control" placeholder="enter your name" [(ngModel)]="model.name"
+          #name="ngModel" required>
+        <div *ngIf="userlogin.submitted && name.invalid">
+          <div class="text-danger" *ngIf="name.errors.required">Name is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Email :</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="model.email"
+          placeholder="enter your email address" required [pattern]="pattern">
+        <div *ngIf="userlogin.submitted && email.invalid">
+          <div class="text-danger" *ngIf="email.errors.required">Email is required</div>
+          <div class="text-danger" *ngIf="email.errors.pattern">Email must be a valid email address</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Password :</label>
+      <div class="col-sm-10">
+        <input type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel"
+          required minlength=6>
+        <div *ngIf="userlogin.submitted && password.invalid" class="text-danger">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </div>
+    </div>
+
+    <fieldset class=" form-group">
+      <div class="row">
+        <legend class="col-form-label col-sm-2 pt-0">choose your flavour: </legend>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+            <label class="form-check-label" for="gridRadios1">
+              NON-VEG
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+            <label class="form-check-label" for="gridRadios2">
+              VEG
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+            <label class="form-check-label" for="gridRadios2">
+              SNACK-ITEM
+            </label>
+          </div>
+
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-group row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" name="acceptTerms" [(ngModel)]="model.acceptTerms" #acceptTerms="ngModel"
+            type="checkbox" required>
+          <label class="form-check-label" for="acceptTerms">
+            I AGREE
+          </label>
+          <div class="text-danger" *ngIf="userlogin.submitted && acceptTerms.invalid">Accept Terms & conditions is
+            required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit" value="submit" class="btn btn-primary">REGISTER</button>
+      </div>
+      <div *ngIf="model.success" class="col-sm-10">
+        <p class="text-success">User registered successfully, please login</p>
+      </div>
+      <div *ngIf="model.failure" class="col-sm-10">
+        <p class="text-danger">Account with this email already exists, please login</p>
+      </div>
+    </div>
+  </form>
+  <footer class="footer" style="background-color: khaki;">
+    <div class="container">
+
+      <p>Copyright &copy; Recipes System. All Rights Reserved. | Contact Us: +91 8520076176</p>
+      <p>This website is developed by Meghana Nuvusetty & Kalisetty Vani Pramadwara</p>
+
+    </div>
+  </footer>
+
+</body>
+<router-outlet></router-outlet>
+
+</html>
